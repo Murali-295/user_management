@@ -5,7 +5,7 @@ const { createUser, getUsers, getUserById, updateUser, deleteUser, checkIfUserEx
 // Create a new user
 router.post('/register', createUser);
 
-// Get all users with pagination
+// Get all users
 router.get('/getUsers', getUsers);
 
 // Get a single user by ID
