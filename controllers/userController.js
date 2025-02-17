@@ -139,4 +139,35 @@ async function checkIfUserExists(req, res) {
     }
 }
 
-module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser, checkIfUserExists };
+//User Login
+async function userLogin(req,res) {
+    try {
+       const {email,password}= req.body;
+       
+        // Connect to the DB
+        const mongo = connection.getDB(); // Get DB instance
+        const userCollection = mongo.collection('users');
+
+         const user= await userCollection.findOne({email});
+         console.log(user);
+         
+         if(!user){
+            return res.json({status:"failed",message:`No user found with the email: ${email}`});
+         }
+         // Compare the hashed password
+         const passCheck=await bcryptjs.compare(`${password}`,user.password)//password.toString()
+
+         if(passCheck){
+            return res.json({status:"success",message:`User found with the email: ${email}`});
+         }
+         else{
+            return res.json({status:"failed",message:"enter valid password: "});
+         }
+    } catch (error) {
+      console.error("Server error during login:", error);
+      res.json({ status: "failed", message: "Server error", err: error.message });
+    }
+
+ }
+ 
+module.exports = { createUser, getUsers, getUserById, updateUser, deleteUser, checkIfUserExists,userLogin };

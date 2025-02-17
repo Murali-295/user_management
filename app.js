@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 
 // Routes
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
