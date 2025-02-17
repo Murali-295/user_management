@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient ,ObjectId } = require('mongodb');
 require('dotenv').config();
 
 let db;
@@ -26,9 +26,13 @@ const getDB = () => {
   return db;
 };
 
+const getObjectId = (req) => {
+  return new ObjectId(req);
+};
+
 // Initialize DB connection when this module is loaded
 connectDB().catch(err => {
   console.error('Error initializing database connection:', err);
 });
 
-module.exports = { connectDB, getDB };
+module.exports = { connectDB, getDB, getObjectId};

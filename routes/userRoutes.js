@@ -12,7 +12,7 @@ router.get('/getUsers', getUsers);
 router.get('/getUserById/:userId', getUserById);
 
 // Update a user by ID
-router.put('/updateUser/:userId', updateUser);
+router.put('/updateUser', updateUser);
 
 // Delete a user by ID
 router.delete('/deleteUser/:userId', deleteUser);
